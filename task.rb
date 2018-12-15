@@ -39,7 +39,6 @@ def ajouteListe(nom)
 end
 
 def supprimeListe(nom)
-
     $conn.execute("delete from liste where nom='#{nom}'")
 end
 
@@ -49,7 +48,7 @@ def liste(liste)
     end
 end
 
-def affichePlaning
+def affichePlanning
     $conn.execute("select nom from liste").each do |temp|
         puts temp
         liste(temp.to_s.tr('[]"',''))
@@ -58,7 +57,6 @@ def affichePlaning
 end
 
 def ajouteTache (liste, tache, date=Date.today.to_s)
-
     $conn.execute("insert into tache (liste_id, tache, termine, date) values ((select liste_id from liste where nom='#{liste}'), '#{tache}', 0, '2019-12-15')")
 end
 
@@ -91,10 +89,10 @@ end
 
 
 if ARGV.empty?
-    puts "Usage: #{__FILE__} <init/list/addList/delList/addTask/delTask/planing/today/late/valid/clean>"
+    puts "Usage: #{__FILE__} <init/list/addList/delList/addTask/delTask/planning/today/late/valid/clean>"
     exit(2)
 else
-    if ARGV[0]=='init' #initialise avec une bdd pre-remplie
+    if ARGV[0]=='init' #initialise avec une bdd pré-remplie
         initialise
 
     elsif ARGV[0]=='list' #affiche une liste
@@ -106,8 +104,8 @@ else
     elsif ARGV[0]=='delList'
         supprimeListe(ARGV[1])
 
-    elsif ARGV[0]=='planing' #affiche toutes les listes
-        affichePlaning
+    elsif ARGV[0]=='planning' #affiche toutes les listes
+        affichePlanning
 
     elsif ARGV[0]=='delTask'
         supprimeTache(ARGV[1])
@@ -128,7 +126,7 @@ else
         clean
 
     else
-        puts "Usage: #{__FILE__} <init/list/addList/delList/delTask/addTask/today/late/valid/clean>"
+        puts "Usage: #{__FILE__} <init/list/addList/delList/addTask/delTask/planning/today/late/valid/clean>"
         exit(2)
     end
 
