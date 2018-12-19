@@ -87,9 +87,13 @@ def clean
     $conn.execute("delete from tache where termine=1")
 end
 
+def help
+    puts "Usage: #{__FILE__} <init/list/addList/delList/addTask/delTask/planning/today/late/valid/clean>"
+end
+
 
 if ARGV.empty?
-    puts "Usage: #{__FILE__} <init/list/addList/delList/addTask/delTask/planning/today/late/valid/clean>"
+    help
     exit(2)
 else
     if ARGV[0]=='init' #initialise avec une bdd pré-remplie
@@ -124,10 +128,12 @@ else
 
     elsif ARGV[0]=='clean' #supprime toute les tache terminées
         clean
+        
+    elsif ARGV[0]=='help' 
+        help
 
     else
-        puts "Usage: #{__FILE__} <init/list/addList/delList/addTask/delTask/planning/today/late/valid/clean>"
+        help
         exit(2)
     end
-
 end
